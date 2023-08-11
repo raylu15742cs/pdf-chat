@@ -85,6 +85,9 @@ def get_conversation_chain(vectorstore):
 
 
 def main():
+    pinecone_api_key = st.secrets["API_KEYS"]["pinecone"]
+
+    pinecone.init(api_key=pinecone_api_key, environment="asia-southeast1-gcp-free")
 
     openai.api_key = st.secrets["API_KEYS"]["openai"]
     
