@@ -19,11 +19,7 @@ import pinecone
 
 from icecream import ic
 
-pinecone_api_key = st.secrets["API_KEYS"]["pinecone"]
 
-pinecone.init(api_key=pinecone_api_key, environment="asia-southeast1-gcp-free")
-
-openai.api_key = st.secrets["API_KEYS"]["openai"]
 
 
 # documentation for CharacterTextSplitter:
@@ -75,8 +71,25 @@ def get_conversation_chain(vectorstore):
     ic(f"conversation_chain is {conversation_chain}")
     return conversation_chain
 
+def get_conversation_chain(vectorstore):
+    llm = ChatOpenAI()
+
+    memory = ConversationBufferMemory(
+        memory_key='chat_history', return_messages=True)
+    conversation_chain = ConversationalRetrievalChain.from_llm(
+        llm=llm,
+        retriever=vectorstore.as_retriever(),
+        memory=memory
+    )
+    return conversation_chain
+
 
 def main():
+    pinecone_api_key = st.secrets["API_KEYS"]["pinecone"]
+
+    pinecone.init(api_key=pinecone_api_key, environment="asia-southeast1-gcp-free")
+
+    openai.api_key = st.secrets["API_KEYS"]["openai"]
 
     # Set up pinecone database
 
