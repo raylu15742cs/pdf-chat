@@ -10,13 +10,12 @@ share/
 include/
 pyvenv.cfg
 
-
 # Ignore compiled Python files
 *.pyc
 *.pyo
 __pycache__/
 
-# Ignore environment-specific settings
+# Ignore environment-specific settin
 .env
 
 # Ignore editor files and directories
@@ -57,3 +56,4 @@ flagged/
 # pdf
 *.pdf
 You can modify this file as per your specific requirements.
+.streamlit/secrets.toml
