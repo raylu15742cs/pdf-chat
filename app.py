@@ -15,8 +15,15 @@ from langchain.chat_models import ChatOpenAI
 from constants import OPENAI_API_KEY, INDEX_NAME
 from views.htmlTemplates import css
 from utils.inputs.pdf import parse_pdfs
+import pinecone
 
 from icecream import ic
+
+pinecone_api_key = st.secrets["API_KEYS"]["pinecone"]
+
+pinecone.init(api_key=pinecone_api_key, environment="asia-southeast1-gcp-free")
+
+openai.api_key = st.secrets["API_KEYS"]["openai"]
 
 
 # documentation for CharacterTextSplitter:
@@ -70,7 +77,6 @@ def get_conversation_chain(vectorstore):
 
 
 def main():
-    openai.api_key = OPENAI_API_KEY
 
     # Set up pinecone database
 
