@@ -110,7 +110,6 @@ def main():
                 vectorstore = get_vectorstore_openAI(doc)
 
     embeddings = OpenAIEmbeddings()
-    INDEX_NAME = 'pdfchat'
     print(f'{INDEX_NAME}')
     vectorstore = Pinecone.from_existing_index(index_name=INDEX_NAME, embedding=embeddings)
     # create conversation chain
